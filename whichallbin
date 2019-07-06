@@ -1,0 +1,5 @@
+#!/bin/sh
+
+whichallbin() { for cmd in "$@"; do out=$(echo "$PATH" | tr : '\n' | xargs -I@ file "@/$cmd" | grep -Ev 'No such file or directory|text' | awk -F'[ :]' '$0=$1' | sort -u); [ "$out" ] && echo "$out"; done; }
+
+whichallbin "$@"
